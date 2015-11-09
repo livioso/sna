@@ -88,7 +88,12 @@ def get_collection_data(url, payload):
     collection.extend(data['results'])
 
     while next_page != "":
-        data = get_data(next_page, payload)
+        try:
+            data = get_data(next_page, payload)
+        except requests.exceptions.ConnectionError as e:
+            print "Raised %s, trying again" % e
+            data = get_data(next_page, payload)
+
         next_page = data['meta']['next']
         collection.extend(data['results'])
 
