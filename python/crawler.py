@@ -40,6 +40,45 @@ def get_groups():
     write_data(groups, '../data/groups.json')
 
 
+def get_members():
+    print "running get_members"
+
+    groups = None
+    group_members = []
+
+    with open('../data/groups.json') as data_file:
+        groups = json.load(data_file)
+
+    # groups = [{'id': '7059'}]
+
+    for group in groups:
+        print "group_id: %s" % group['id']
+        # print "members count: %s" % group['members']
+
+        payload = {
+            'group_id': group['id'],
+            'sign': 'True',
+            'format': 'json',
+            'page': '200',
+            'key': API_KEY
+        }
+
+        url = "https://api.meetup.com/2/members"
+
+        print 'fetching member data'
+        members = get_collection_data(url, payload)
+
+        print 'building group member colletionc'
+        for member in members:
+            group_members.extend({
+                'group_id': group['id'],
+                'member_id': member['id'],
+                'name': member['name'],
+            })
+
+    write_data(group_members, '../data/members.json')
+
+
 def get_collection_data(url, payload):
     # get the data
     collection = []
@@ -54,11 +93,6 @@ def get_collection_data(url, payload):
         collection.extend(data['results'])
 
     return collection
-
-
-def get_members():
-    print "running get_members"
-    # API_URL = "https://api.meetup.com/2/members?&sign=true&photo-host=public&group_id=%s" % (group_id)
 
 
 def get_data(url, payload):
