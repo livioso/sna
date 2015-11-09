@@ -35,27 +35,35 @@ def get_groups():
     # groups in city of zurich
     url = "https://api.meetup.com/2/groups"
 
-    data = get_groups_data(url, payload)
-    groups = data['results']
-    next_page = data['meta']['next']
-
-    while next_page != "":
-        data = get_groups_data(next_page, payload)
-        groups.append(data['results'])
-        next_page = data['meta']['next']
+    groups = get_collection_data(url, payload)
 
     write_data(groups, '../data/groups.json')
 
 
-def get_groups_data(url, payload):
+def get_collection_data(url, payload):
     # get the data
-    r = requests.get(url, params=payload)
-    return r.json()
+    collection = []
+
+    data = get_data(url, payload)
+    next_page = data['meta']['next']
+    collection.extend(data['results'])
+
+    while next_page != "":
+        data = get_data(next_page, payload)
+        next_page = data['meta']['next']
+        collection.extend(data['results'])
+
+    return collection
 
 
 def get_members():
     print "running get_members"
     # API_URL = "https://api.meetup.com/2/members?&sign=true&photo-host=public&group_id=%s" % (group_id)
+
+
+def get_data(url, payload):
+    r = requests.get(url, params=payload)
+    return r.json()
 
 
 def write_data(data, file):
