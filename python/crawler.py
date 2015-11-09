@@ -49,10 +49,12 @@ def get_members():
     with open('../data/groups.json') as data_file:
         groups = json.load(data_file)
 
-    # groups = [{'id': '7059'}]
+    # test group
+    # groups = [{'id': '19008715'}, {'id': '19056459'}]
 
-    for group in groups:
-        print "group_id: %s" % group['id']
+    for index, group in enumerate(groups):
+        index += 1
+        print "%s in %s, group_id: %s" % (index, len(groups), group['id'])
         # print "members count: %s" % group['members']
 
         payload = {
@@ -76,9 +78,10 @@ def get_members():
                 'member_id': member.get('id'),
                 'name': member.get('name'),
             })
-        print len(members)
+        print "group_id: %s, members: %s" % (group.get('id'), len(members))
+        print
 
-    print len(group_members)
+    print "Total number of members: %s" % len(group_members)
     write_data(group_members, '../data/members.json')
 
 
