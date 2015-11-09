@@ -28,20 +28,29 @@ def get_groups():
         'radius': city.get('radius'),
         'sign': 'True',
         'format': 'json',
-        'offset': '1',
         'page': '200',
         'key': API_KEY
     }
 
     # groups in city of zurich
-    API_URL = "https://api.meetup.com/2/groups"
+    url = "https://api.meetup.com/2/groups"
 
+    data = get_groups_data(url, payload)
+    groups = data['results']
+    next_page = data['meta']['next']
+
+    while next_page != "":
+        data = get_groups_data(next_page, payload)
+        groups.append(data['results'])
+        next_page = data['meta']['next']
+
+    write_data(groups, '../data/groups.json')
+
+
+def get_groups_data(url, payload):
     # get the data
-    r = requests.get(API_URL, params=payload)
-    print r.url
-    data = r.json()
-
-    write_data(data, '../data/groups.json')
+    r = requests.get(url, params=payload)
+    return r.json()
 
 
 def get_members():
