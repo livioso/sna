@@ -60,6 +60,7 @@ def get_members():
             'sign': 'True',
             'format': 'json',
             'page': '200',
+            'only': 'id,name,country,city,joined',
             'key': API_KEY
         }
 
