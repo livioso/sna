@@ -56,7 +56,7 @@ def get_members():
         # print "members count: %s" % group['members']
 
         payload = {
-            'group_id': group['id'],
+            'group_id': group.get('id'),
             'sign': 'True',
             'format': 'json',
             'page': '200',
@@ -72,11 +72,13 @@ def get_members():
         print 'building group member collection'
         for member in members:
             group_members.append({
-                'group_id': group['id'],
-                'member_id': member['id'],
-                'name': member['name'],
+                'group_id': group.get('id'),
+                'member_id': member.get('id'),
+                'name': member.get('name'),
             })
+        print len(members)
 
+    print len(group_members)
     write_data(group_members, '../data/members.json')
 
 
