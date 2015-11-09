@@ -69,9 +69,9 @@ def get_members():
         print 'fetching member data'
         members = get_collection_data(url, payload)
 
-        print 'building group member colletionc'
+        print 'building group member collection'
         for member in members:
-            group_members.extend({
+            group_members.append({
                 'group_id': group['id'],
                 'member_id': member['id'],
                 'name': member['name'],
@@ -106,8 +106,8 @@ def get_data(url, payload):
     return r.json()
 
 
-def write_data(data, file):
-    with open(file, 'w+') as outfile:
+def write_data(data, path):
+    with open(path, 'w+') as outfile:
         json.dump(data, outfile)
 
 
