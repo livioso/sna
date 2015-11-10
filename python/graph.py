@@ -16,6 +16,7 @@ def generate_graph():
     # print members[0]
 
     print "Total number of groups: %s" % len(groups)
+
     for index, group in enumerate(groups):
         graph.addNode(
             group.get('id'),
@@ -23,17 +24,15 @@ def generate_graph():
         )
 
     print "Total number of members: %s" % len(members)
+
     for index, member in enumerate(members):
         print index + 1
-        name = member.get('name')
-        if name:
-            name = name.encode('ascii', 'ignore')
-        else:
-            name = ""
+
         graph.addNode(
             member.get('member_id'),
-            name
+            name=get_member_name(member.get('name'))
         )
+
         graph.addEdge(
             index,
             member.get('group_id'),
@@ -41,6 +40,14 @@ def generate_graph():
         )
 
     return gexf
+
+
+def get_member_name(name):
+    if name:
+        name = name.encode('ascii', 'ignore')
+    else:
+        name = ""
+    return name
 
 
 def get_data(path):
