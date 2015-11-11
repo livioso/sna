@@ -8,7 +8,7 @@ Fetches data from *groups* in Zurich and their *members* and stores in in JSON f
 
 ## Graph-Export
 
-Exports a Gephi-compatible `.gexf file with groups and member nodes/edges.
+Exports a Gephi-compatible `.gexf` file with groups and member nodes/edges.
 
 ## Development setup
 
@@ -28,10 +28,10 @@ Exports a Gephi-compatible `.gexf file with groups and member nodes/edges.
 
 ### Run
 
-    # Get your API key at https://secure.meetup.com/meetup_api/key/
-
     # Change into scripts directory
     cd python
+
+    # Get your API key at https://secure.meetup.com/meetup_api/key/
 
     # Crawl groups and members data from meetup
     env API_KEY='<YOUR_API_KEY>' python crawler.py get_groups get_members
