@@ -9,6 +9,9 @@ def generate_graph():
     gexf = Gexf("sna - meetup.com", "A meetup.com social network analysis")
     graph = gexf.addGraph("undirected", "static", "Meetup groups graph")
 
+    # attributes
+    organizer_attr = graph.addNodeAttribute('organizer', 'None', 'string')
+
     groups = get_data('../data/groups.json')
     members = get_data('../data/members.json')
 
@@ -18,25 +21,27 @@ def generate_graph():
     print "Total number of groups: %s" % len(groups)
 
     for index, group in enumerate(groups):
-        graph.addNode(
-            group.get('id'),
+        node = graph.addNode(
+            "G-%s" % group.get('id'),
             group.get('urlname')
         )
+        if group.get('organizer'):
+            node.addAttribute(organizer_attr, str(group.get('organizer').get('member_id')))
 
     print "Total number of members: %s" % len(members)
 
     for index, member in enumerate(members):
-        print index + 1
+        # print index + 1
 
         graph.addNode(
-            member.get('member_id'),
+            "M-%s" % member.get('member_id'),
             get_member_name(member.get('name'))
         )
 
         graph.addEdge(
             index,
-            member.get('group_id'),
-            member.get('member_id')
+            "G-%s" % member.get('group_id'),
+            "M-%s" % member.get('member_id'),
         )
 
     return gexf
