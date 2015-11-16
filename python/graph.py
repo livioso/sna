@@ -7,7 +7,7 @@ from gexf import Gexf
 
 def generate_graph():
     gexf = Gexf("sna - meetup.com", "A meetup.com social network analysis")
-    graph = gexf.addGraph("directed", "static", "Meetup groups graph")
+    graph = gexf.addGraph("undirected", "static", "Meetup groups graph")
 
     groups = get_data('../data/groups.json')
     members = get_data('../data/members.json')
@@ -30,7 +30,7 @@ def generate_graph():
 
         graph.addNode(
             member.get('member_id'),
-            name=get_member_name(member.get('name'))
+            get_member_name(member.get('name'))
         )
 
         graph.addEdge(
