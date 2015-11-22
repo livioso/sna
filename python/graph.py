@@ -11,6 +11,8 @@ def generate_graph():
 
     # attributes
     organizer_attr = graph.addNodeAttribute('organizer', 'None', 'string')
+    type_attr = graph.addNodeAttribute('type', 'None', 'string')
+    category_attr = graph.addNodeAttribute('category', 'None', 'integer')
 
     groups = get_data('../data/groups.json')
     members = get_data('../data/members.json')
@@ -27,6 +29,9 @@ def generate_graph():
         )
         if group.get('organizer'):
             node.addAttribute(organizer_attr, str(group.get('organizer').get('member_id')))
+        if group.get('category'):
+            node.addAttribute(category_attr, str(group.get('category').get('id')))
+        node.addAttribute(type_attr, 'Group')
 
     print "Total number of members: %s" % len(members)
 
@@ -37,6 +42,7 @@ def generate_graph():
             "M-%s" % member.get('member_id'),
             get_member_name(member.get('name'))
         )
+        node.addAttribute(type_attr, 'Member')
 
         graph.addEdge(
             index,
