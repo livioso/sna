@@ -55,7 +55,7 @@ def get_members():
     group_members = []
 
     # load groups data
-    with open('../data/groups.json') as data_file:
+    with open('data/groups.json') as data_file:
         groups = json.load(data_file)
 
     # test group
@@ -91,7 +91,7 @@ def get_members():
         print
 
     print "Total number of members: %s" % len(group_members)
-    write_data(group_members, '../data/members.json')
+    write_data(group_members, 'data/members.json')
 
 
 def get_collection_data(url, payload):
