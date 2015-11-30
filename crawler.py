@@ -30,7 +30,7 @@ def get_groups():
         'lon': city.get('lon'),
         'lat': city.get('lat'),
         'radius': city.get('radius'),
-        'category': 34,  # category 'tech'
+        'category_id': 34,  # category 'tech'
         'sign': 'True',
         'format': 'json',
         'page': '200',
