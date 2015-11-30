@@ -44,7 +44,7 @@ def get_groups():
     groups = get_collection_data(url, payload)
 
     # save data
-    write_data(groups, '../data/groups.json')
+    write_data(groups, 'data/groups.json')
 
 
 # get meetup members of groups

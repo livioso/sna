@@ -18,7 +18,7 @@ Exports a Gephi-compatible `.gexf` file with groups and member nodes/edges.
 - lxml
 - pygexf
 
-### Install
+### Setup
 
     # Create a virtualenv
     mkvirtualenv sna
@@ -26,10 +26,10 @@ Exports a Gephi-compatible `.gexf` file with groups and member nodes/edges.
     # Install dependencies
     pip install -r REQUIREMENTS
 
-### Run
+### Usage
 
-    # Change into scripts directory
-    cd python
+    # Activate virtualenv
+    workon sna
 
     # Get your API key at https://secure.meetup.com/meetup_api/key/
 
@@ -37,4 +37,4 @@ Exports a Gephi-compatible `.gexf` file with groups and member nodes/edges.
     env API_KEY='<YOUR_API_KEY>' python crawler.py get_groups get_members
 
     # Generate Gephi graph
-    python graph.py
+    graph.py

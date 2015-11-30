@@ -14,8 +14,8 @@ def generate_graph():
     type_attr = graph.addNodeAttribute('type', 'None', 'string')
     category_attr = graph.addNodeAttribute('category', 'None', 'integer')
 
-    groups = get_data('../data/groups.json')
-    members = get_data('../data/members.json')
+    groups = get_data('data/groups.json')
+    members = get_data('data/members.json')
 
     # print groups[0]
     # print members[0]
@@ -67,7 +67,7 @@ def get_data(path):
 
 
 def generate_xml(gexf):
-    output_file = open("../graphs/groups.gexf", "w")
+    output_file = open("graphs/groups.gexf", "w")
     gexf.write(output_file)
 
 
