@@ -38,7 +38,7 @@ def generate_graph():
     for index, member in enumerate(members):
         # print index + 1
 
-        graph.addNode(
+        node = graph.addNode(
             "M-%s" % member.get('member_id'),
             get_member_name(member.get('name'))
         )
