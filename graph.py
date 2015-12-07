@@ -20,6 +20,10 @@ def generate_graph():
     # print groups[0]
     # print members[0]
 
+    
+
+    groups = list(filter(lambda x: int(x['members']) >= 500, groups))
+
     print "Total number of groups: %s" % len(groups)
 
     for index, group in enumerate(groups):
@@ -33,11 +37,17 @@ def generate_graph():
             node.addAttribute(category_attr, str(group.get('category').get('id')))
         node.addAttribute(type_attr, 'Group')
 
+    
+
+    members = list(filter(lambda x: (x['group_id']) in list(map(lambda x: x['id'] ,groups)),members))
+
     print "Total number of members: %s" % len(members)
+
 
     for index, member in enumerate(members):
         # print index + 1
 
+        
         node = graph.addNode(
             "M-%s" % member.get('member_id'),
             get_member_name(member.get('name'))
