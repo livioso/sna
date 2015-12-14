@@ -22,7 +22,7 @@ def generate_graph():
 
     
 
-    groups = list(filter(lambda x: int(x['members']) >= 500, groups))
+    groups = list(filter(lambda x: int(x['members']) <= 200, groups))
 
     print "Total number of groups: %s" % len(groups)
 
@@ -77,7 +77,7 @@ def get_data(path):
 
 
 def generate_xml(gexf):
-    output_file = open("graphs/groups.gexf", "w")
+    output_file = open("graphs/groups2.gexf", "w")
     gexf.write(output_file)
 
 
